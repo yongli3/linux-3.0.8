@@ -80,7 +80,6 @@ int s5p_usb_phy_init(struct platform_device *pdev, int type)
 	}
 #if 1//crazyboys 2014140315 reboot usb host error patch
 	if (type == S5P_USB_PHY_HOST) {
-
 		 __raw_writel(__raw_readl(S3C_USBOTG_PHYPWR) | (0x1<<7)|(0x1<<6),
                 	        S3C_USBOTG_PHYPWR);
         	__raw_writel(__raw_readl(S5P_USB_PHY_CONTROL) & ~(1<<1),
