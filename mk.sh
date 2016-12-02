@@ -1,4 +1,8 @@
 
+time make  ARCH=arm CROSS_COMPILE="ccache arm-none-linux-gnueabi-" -j8 uImage V=1
+
+# gcc 4.9+ build okay, but boot fail
+time make  ARCH=arm CROSS_COMPILE="ccache arm-linux-gnueabihf-" KCFLAGS="-march=armv5t" EXTRA_CFLAGS="-mno-unaligned-access" uImage  V=1
 time ARCH=arm CROSS_COMPILE="ccache arm-linux-gnueabi-" make uImage  -j8 V=1
 time make -j2 zImage V=1
 time make -j2 modules V=1

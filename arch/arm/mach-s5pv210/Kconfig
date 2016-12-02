@@ -266,7 +266,7 @@ config S5PV210_SETUP_FIMC2
 	  Common setup code for FIMC controller 2.
 config S5PV210_SETUP_CSIS
 	bool
-	depends on VIDEO_FIMC
+	depends on VIDEO_FIMC || CPU_FREQ
 	default y
 	help
 	  Common setup code for MIPI-CSIS

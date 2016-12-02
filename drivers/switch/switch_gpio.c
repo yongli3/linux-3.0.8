@@ -38,7 +38,9 @@ struct gpio_switch_data {
 	struct work_struct work;
 };
 
+#ifdef CONFIG_SND_SOC_WM8978
 extern void wm8978_headset(int on);
+#endif
 static void gpio_switch_work(struct work_struct *work)
 {
 	int state;
@@ -47,7 +49,9 @@ static void gpio_switch_work(struct work_struct *work)
 
 	msleep(30);
 	state = gpio_get_value(data->gpio);
+#ifdef CONFIG_SND_SOC_WM8978
 	wm8978_headset(state);
+#endif
 	// switch_set_state(&data->sdev, state);
 }
 
