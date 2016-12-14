@@ -47,6 +47,8 @@ static int s5p_gpioint_set_type(struct irq_data *d, unsigned int type)
 	struct irq_chip_type *ct = gc->chip_types;
 	unsigned int shift = (d->irq - gc->irq_base) << 2;
 
+    printk("**%s type=%x reg_base=%x type=%x\n", __func__, type, gc->reg_base, ct->regs.type);
+
 	switch (type) {
 	case IRQ_TYPE_EDGE_RISING:
 		type = S5P_IRQ_TYPE_EDGE_RISING;

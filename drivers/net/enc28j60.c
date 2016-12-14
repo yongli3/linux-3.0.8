@@ -12,7 +12,7 @@
  *
  * $Id: enc28j60.c,v 1.22 2007/12/20 10:47:01 claudio Exp $
  */
-
+#define DEBUG
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/types.h>
@@ -37,7 +37,7 @@
 #define SPI_OPLEN	1
 
 #define ENC28J60_MSG_DEFAULT	\
-	(NETIF_MSG_PROBE | NETIF_MSG_IFUP | NETIF_MSG_IFDOWN | NETIF_MSG_LINK)
+	(NETIF_MSG_DRV | NETIF_MSG_HW | NETIF_MSG_PROBE | NETIF_MSG_IFUP | NETIF_MSG_IFDOWN | NETIF_MSG_LINK)
 
 /* Buffer size required for the largest SPI transfer (i.e., reading a
  * frame). */

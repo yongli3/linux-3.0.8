@@ -53,6 +53,7 @@ void __init s3c_init_cpu(unsigned long idcode,
 		panic("Unknown S3C24XX CPU");
 	}
 
+    // CPU S5PV210/S5PC110 (id 0x43110220)
 	printk("CPU %s (id 0x%08lx)\n", cpu->name, idcode);
 
 	if (cpu->map_io == NULL || cpu->init == NULL) {

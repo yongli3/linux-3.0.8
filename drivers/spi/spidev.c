@@ -19,7 +19,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-
+#define DEBUG
+#define VERBOSE
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/ioctl.h>

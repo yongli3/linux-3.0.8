@@ -66,6 +66,8 @@ static int s5p_irq_eint_set_type(struct irq_data *data, unsigned int type)
 	u32 ctrl, mask;
 	u32 newvalue = 0;
 
+    printk("**%s type=%x\n", __func__, type);
+    
 	switch (type) {
 	case IRQ_TYPE_EDGE_RISING:
 		newvalue = S5P_IRQ_TYPE_EDGE_RISING;

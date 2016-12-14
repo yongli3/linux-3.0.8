@@ -1507,12 +1507,16 @@ static void __init x210_dm9000_init(void)
 { 
 	unsigned int tmp; 
 	tmp = __raw_readl(S5P_SROM_BW); 
+    printk("**%s read %x\n", __func__, tmp);
 	tmp &= ~(0xf << 4); 
 	tmp |= (1<<7) | (1<<6) | (1<<5) | (1<<4); // dm9000 16bit 
-	__raw_writel(tmp, S5P_SROM_BW); 
-       __raw_writel((0x0<<28)|(0x0<<24)|(0x5<<16)|(0x0<<12)|(0x0<<8)|(0x0<<4)|(0x0<<0), S5P_SROM_BC1); 
-	tmp = __raw_readl(S5PV210_MP01CON); 
-	tmp |= (2 << 4); 
+        printk("**%s write %x\n", __func__, tmp);
+    __raw_writel(tmp, S5P_SROM_BW); 
+    __raw_writel((0x0<<28)|(0x0<<24)|(0x5<<16)|(0x0<<12)|(0x0<<8)|(0x0<<4)|(0x0<<0), S5P_SROM_BC1); 
+	tmp = __raw_readl(S5PV210_MP01CON);
+    printk("**%s read %x\n", __func__, tmp);
+	tmp |= (2 << 4);
+    printk("**%s write %x\n", __func__, tmp);
 	__raw_writel(tmp, S5PV210_MP01CON); 
 }
 

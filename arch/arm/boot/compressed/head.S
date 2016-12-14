@@ -8,6 +8,9 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
  */
+
+#define DEBUG
+ 
 #include <linux/linkage.h>
 
 /*
@@ -134,7 +137,6 @@ start:
  THUMB(		.thumb			)
 1:		mov	r7, r1			@ save architecture ID
 		mov	r8, r2			@ save atags pointer
-
 #ifndef __ARM_ARCH_2__
 		/*
 		 * Booting from Angel - need to enter SVC mode and disable
@@ -216,6 +218,9 @@ restart:	adr	r0, LC0
 		mov	r10, r6
 #endif
 
+		/*kphex r4, 8
+		 *mov r0, #0
+		*/
 /*
  * Check to see if we will overwrite ourselves.
  *   r4  = final kernel address
@@ -458,6 +463,7 @@ __armv3_mpu_cache_on:
 		mcr	p15, 0, r0, c7, c0, 0	@ invalidate whole cache v3
 		mov	pc, lr
 
+		/* R4=kernel execution address  */
 __setup_mmu:	sub	r3, r4, #16384		@ Page directory size
 		bic	r3, r3, #0xff		@ Align the pointer
 		bic	r3, r3, #0x3f00
@@ -538,6 +544,12 @@ __armv7_mmu_cache_on:
 		tst	r11, #0xf		@ VMSA
 		mcrne	p15, 0, r0, c8, c7, 0	@ flush I,D TLBs
 #endif
+		mov r11, r3
+		kphex  r3, 8
+		kputc #'x'
+		mov r3, r11
+		kphex  r3, 8
+		mov r3, r11
 		mrc	p15, 0, r0, c1, c0, 0	@ read control reg
 		orr	r0, r0, #0x5000		@ I-cache enable, RR cache replacement
 		orr	r0, r0, #0x003c		@ write buffer
@@ -619,6 +631,7 @@ call_cache_fn:	adr	r12, proc_types
 #else
 		ldr	r9, =CONFIG_PROCESSOR_ID
 #endif
+		/* kphex r9, 8 r9=0x412fc082 */
 1:		ldr	r1, [r12, #0]		@ get value
 		ldr	r2, [r12, #4]		@ get mask
 		eor	r1, r1, r9		@ (real ^ match)

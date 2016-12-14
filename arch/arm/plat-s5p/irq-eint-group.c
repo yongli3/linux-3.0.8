@@ -485,6 +485,8 @@ static int s5pv210_irq_eint_group_set_type(unsigned int irq, unsigned int type)
 	int grp, shift;
 	u32 mask, newvalue = 0;
 
+    printk("**%s irq=%x\n", __func__, irq);
+
 	grp = to_group_number(irq);
 	group = &eint_groups[grp];
 
